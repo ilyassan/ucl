@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import { create } from "zustand"
-import { persist } from "zustand/middleware"
-import type { Match } from "@/lib/types"
-import { fetchMatches } from "@/lib/api"
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
+import type { Match } from "@/lib/types";
+import { fetchMatches } from "@/lib/api";
 
 interface MatchStore {
-  matches: Match[]
-  favorites: string[]
-  currentPage: number
+  matches: Match[];
+  favorites: string[];
+  currentPage: number;
   actions: {
-    loadMatches: () => Promise<void>
-    toggleFavorite: (matchId: string) => void
-    setPagination: (page: number) => void
-  }
+    loadMatches: () => Promise<void>;
+    toggleFavorite: (matchId: string) => void;
+    setPagination: (page: number) => void;
+  };
 }
 
 export const useMatchStore = create<MatchStore>()(
@@ -22,36 +22,33 @@ export const useMatchStore = create<MatchStore>()(
       matches: [],
       favorites: [],
       currentPage: 1,
+      error: null,
       actions: {
         loadMatches: async () => {
           try {
-            // Only fetch if we don't have matches already
-            if (get().matches.length === 0) {
-              const matches = await fetchMatches()
-              set({ matches })
-            }
+            const matches = await fetchMatches();
+            set({ matches });
           } catch (error) {
-            console.error("Failed to load matches:", error)
+            console.error("Failed to load matches:", error);
           }
         },
         toggleFavorite: (matchId: string) => {
-          const { favorites } = get()
-          const isFavorite = favorites.includes(matchId)
-
-          if (isFavorite) {
-            set({ favorites: favorites.filter((id) => id !== matchId) })
-          } else {
-            set({ favorites: [...favorites, matchId] })
-          }
+          const { favorites } = get();
+          set({
+            favorites: favorites.includes(matchId)
+              ? favorites.filter((id) => id !== matchId)
+              : [...new Set([...favorites, matchId])],
+          });
         },
         setPagination: (page: number) => {
-          set({ currentPage: page })
+          set({ currentPage: page });
         },
       },
     }),
     {
       name: "champions-league-store",
+      storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({ favorites: state.favorites }),
     },
   ),
-)
+);

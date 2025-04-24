@@ -1,8 +1,9 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Image from "next/image"
-import { motion } from "framer-motion"
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link"; // Import Link
+import { motion } from "framer-motion";
 
 export default function HeroSection() {
   const [timeRemaining, setTimeRemaining] = useState({
@@ -10,33 +11,33 @@ export default function HeroSection() {
     hours: 0,
     minutes: 0,
     seconds: 0,
-  })
+  });
 
   useEffect(() => {
-    const targetDate = new Date("2025-04-15T19:00:00Z")
+    const targetDate = new Date("2025-04-15T19:00:00Z");
 
     const updateCountdown = () => {
-      const now = new Date()
-      const difference = targetDate.getTime() - now.getTime()
+      const now = new Date();
+      const difference = targetDate.getTime() - now.getTime();
 
       if (difference <= 0) {
-        setTimeRemaining({ days: 0, hours: 0, minutes: 0, seconds: 0 })
-        return
+        setTimeRemaining({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return;
       }
 
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24))
-      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))
-      const seconds = Math.floor((difference % (1000 * 60)) / 1000)
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-      setTimeRemaining({ days, hours, minutes, seconds })
-    }
+      setTimeRemaining({ days, hours, minutes, seconds });
+    };
 
-    updateCountdown()
-    const interval = setInterval(updateCountdown, 1000)
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="relative h-[40vh] min-h-[300px] flex items-center justify-center overflow-hidden">
@@ -79,7 +80,15 @@ export default function HeroSection() {
             </div>
           ))}
         </div>
+
+        {/* Favorites Link */}
+        <Link
+          href="/favorites"
+          className="mt-6 inline-block text-[#38BDF8] hover:text-[#F8FAFC] font-medium text-sm underline transition-colors"
+        >
+          View Your Favorite Matches
+        </Link>
       </motion.div>
     </div>
-  )
+  );
 }

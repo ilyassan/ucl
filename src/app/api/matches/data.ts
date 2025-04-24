@@ -186,7 +186,7 @@ export const data = {
                     "id": "h8",
                     "name": "Karim Adeyemi",
                     "number": 27,
-                    "image": "https://img.sofascore.com/api/v1/player/940054/image",
+                    "image": "https://cdn.futwiz.com/assets/img/fc25/faces/251852.png",
                     "position": "RW",
                     "role": "STARTER",
                     "rating": 8.3,
