@@ -10,7 +10,7 @@ export default function MatchDetailTabs({ matchId }: { matchId: string }) {
   const [activeTab, setActiveTab] = useState("overview")
   const { data, isLoading } = useMatchDetails(matchId)
 
-  if (isLoading) {
+  if (isLoading || !data) {
     return <div>Loading...</div>
   }
 

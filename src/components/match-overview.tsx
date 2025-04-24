@@ -182,10 +182,9 @@ export default function MatchOverview({ data }: { data: MatchDetails }) {
           <CardContent className="pt-6">
             <div className="flex flex-col items-center">
               <div className="relative w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-[#1E40AF]">
-                <Image
-                  src={`/placeholder.svg?height=128&width=128&text=${manOfTheMatch.name.charAt(0)}`}
+                <img
+                  src={manOfTheMatch.image}
                   alt={manOfTheMatch.name}
-                  fill
                   className="object-cover"
                 />
               </div>

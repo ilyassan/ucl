@@ -59,9 +59,9 @@ export default function MatchCard({ match }: { match: Match }) {
           </div>
 
           <div className="flex justify-between items-center">
-            <TeamBadge team={match.homeTeam} />
+            <TeamBadge team={match.homeTeam} logo={match.homeTeamLogo} />
             <ScorePill score={match.score} status={match.status} />
-            <TeamBadge team={match.awayTeam} isAway />
+            <TeamBadge team={match.awayTeam} logo={match.awayTeamLogo} isAway />
           </div>
 
           <div className="flex justify-between items-center mt-4">
@@ -95,12 +95,12 @@ export default function MatchCard({ match }: { match: Match }) {
   )
 }
 
-function TeamBadge({ team, isAway = false }: { team: string; isAway?: boolean }) {
+function TeamBadge({ team, logo, isAway = false }: { team: string; logo: string; isAway?: boolean }) {
   return (
     <div className={`flex items-center gap-3 ${isAway ? "flex-row-reverse" : ""}`}>
       <div className="relative w-12 h-12 bg-[#0F172A] rounded-full overflow-hidden">
         <img
-          src={`https://img.sofascore.com/api/v1/team/2817/image`}
+          src={logo}
           alt={team}
           className="object-cover"
         />
