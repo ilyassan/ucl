@@ -66,13 +66,10 @@ export default function MatchLineups({ data }: { data: MatchDetails }) {
 function PitchView({ players, formation }: { players: any[]; formation: string }) {
   const starters = players.filter((player) => player.role === "STARTER")
 
-  // Parse formation (e.g., "4-3-3" => [4, 3, 3])
   const formationRows = formation.split("-").map(Number)
 
-  // Add goalkeeper to the formation
   const fullFormation = [1, ...formationRows]
 
-  // Group players by position
   const groupedPlayers = []
   let playerIndex = 0
 

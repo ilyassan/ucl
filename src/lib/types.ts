@@ -61,7 +61,7 @@ export interface Match {
   score: string;
   status: "FINISHED" | "SCHEDULED" | "IN_PROGRESS" | "POSTPONED";
   timestamp: number;
-  date?: string; // Added to match the JSON structure
+  date?: string;
 }
 
 export interface MatchesByDate {

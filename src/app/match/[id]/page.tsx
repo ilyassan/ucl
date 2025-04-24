@@ -9,7 +9,6 @@ import { fetchMatchById } from "@/lib/api"
 import { Match } from "@/lib/types"
 
 export default function MatchDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  // Unwrap the params promise
   const { id: matchId } = use(params)
   const [match, setMatch] = useState<Match | null>(null)
   const [isLoading, setIsLoading] = useState(true)

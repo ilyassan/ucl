@@ -9,7 +9,6 @@ export default function MatchesGrid() {
   const { matches, currentPage, actions } = useMatchStore()
   const [itemsPerPage] = useState(2)
 
-  // Calculate pagination
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
   const currentMatches = matches.slice(indexOfFirstItem, indexOfLastItem)

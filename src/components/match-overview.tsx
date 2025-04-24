@@ -24,14 +24,12 @@ import { Trophy } from "lucide-react"
 export default function MatchOverview({ data }: { data: MatchDetails }) {
   const { incidents, stats, lineups } = data
 
-  // Find man of the match (highest rated player)
   const allPlayers = [...lineups.home.players, ...lineups.away.players]
   const manOfTheMatch = allPlayers.reduce(
     (highest, current) => (current.rating > highest.rating ? current : highest),
     allPlayers[0],
   )
 
-  // Format stats for charts
   const possessionData = [
     { name: "Possession", home: stats.home.possessionPercent, away: stats.away.possessionPercent },
   ]
